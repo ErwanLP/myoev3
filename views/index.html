@@ -8,11 +8,19 @@
 <body>
 <h1>Communication avec socket.io !</h1>
 
+<p><input type="button" value="wave in" id="poke" /></p>
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io.connect('http://localhost:3000');
-    socket.on('message', function(message) {
-        alert('Le serveur a un message pour vous : ' + message);
+    socket.on('socket_event', function(event) {
+        alert('Event : ' + event);
+    })
+
+    $('#poke').click(function () {
+        socket.emit('client_event', 'wave_in');
     })
 </script>
 </body>

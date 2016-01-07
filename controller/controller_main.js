@@ -1,10 +1,14 @@
 /**
  * Created by Erwan on 15/12/2015.
  */
+
+var controller_socket = require('./controller_socket');
+//var controller_sphero = require('./controller_sphero');
 var controller_main = {};
 
 
 controller_main.treatment = function(event){
+    controller_socket.emit(event);
     switch(event) {
         case "fingers_spread":
             console.log('fingers_spread');
@@ -14,6 +18,7 @@ controller_main.treatment = function(event){
             break;
         case "wave_in":
             console.log('wave_in');
+            //controller_sphero.left();
             break;
         case "wave_in_off":
             console.log('wave_in_off');

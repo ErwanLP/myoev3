@@ -26,14 +26,15 @@ var server = http.createServer(app);
  */
 
 var io = require('socket.io').listen(server);
+var socketMVC = require('socket.mvc');
 
-// Quand un client se connecte, on le note dans la console
-io.sockets.on('connection', function (socket) {
-  console.log('Un client est connecté !');
-});
+//Set socket.io configuration here
 
 io.sockets.on('connection', function (socket) {
-  socket.emit('message', 'Vous êtes bien connecté !');
+  socketMVC.init(io, socket, {
+    debug: true,
+    filePath: ['./routes/socket.js']
+  });
 });
 
 
