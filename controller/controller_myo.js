@@ -1,4 +1,4 @@
-/**
+	/**
  * Created by Erwan on 14/12/2015.
  */
 var Myo = require('myo');
@@ -15,6 +15,8 @@ Myo.connect('com.stolksdorf.myAwesomeApp');
 Myo.on('connected', function(){
     console.log('connected with myo');
 });
+
+
 
 /** Pose */
 Myo.on('fingers_spread', function(){

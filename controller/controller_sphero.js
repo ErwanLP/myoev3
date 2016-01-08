@@ -6,7 +6,7 @@ var controller_sphero = {};
 // require("controller-myo.js");
 /* eslint no-use-before-define: 0 */
 /* eslint no-process-exit: 0 */
-
+var Myo = require('myo');
 var sphero = require("sphero");
 
 // make sure you install this first - `npm install keypress`
@@ -15,9 +15,17 @@ var keypress = require("keypress");
 var orb = sphero("COM3");
 
 orb.connect(listen);
-
 var stop = orb.roll.bind(orb, 0, 0),
     roll = orb.roll.bind(orb, 60);
+	
+Myo.on('gyroscope', function(data){
+if(data.z>50){
+	roll=orb.roll.bind(orb, 160);
+	}
+else if(data.z<-20){
+	roll=orb.roll.bind(orb, 20)
+}
+});
 
 controller_sphero.up = function(){
     roll(0);
