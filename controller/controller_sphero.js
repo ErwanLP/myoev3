@@ -18,14 +18,17 @@ orb.connect(listen);
 var stop = orb.roll.bind(orb, 0, 0),
     roll = orb.roll.bind(orb, 60);
 	
-Myo.on('gyroscope', function(data){
-if(data.z>50){
-	roll=orb.roll.bind(orb, 160);
-	}
-else if(data.z<-20){
-	roll=orb.roll.bind(orb, 20)
-}
-});
+// Myo.on('gyroscope', function(data){
+// if(data.z>30){
+	// roll=orb.roll.bind(orb, 160);
+	// }
+// else if(data.z<-30){
+	// roll=orb.roll.bind(orb, 20)
+// }
+// else{
+	// roll=orb.roll.bind(orb, 60)
+// }
+// });
 
 controller_sphero.up = function(){
     roll(0);
