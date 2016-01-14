@@ -3,7 +3,7 @@
  */
 var myoApp = angular.module('myoApp',[]);
 
-myoApp.controller('MainController', ['$scope', function($scope) {
+myoApp.controller('MainController', ['$scope', 'displayService', function($scope, displayService) {
     $scope.greeting = 'Hola!';
     console.log('Main controller init');
 }]);
