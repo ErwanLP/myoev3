@@ -86,19 +86,26 @@ myoApp.factory('displayService', ['$http', function ($http) {
         requestAnimationFrame( animate );
         // update camera controls
         //cameraControls.update();
-        s.mode = null;
+        //s.mode = null;
         if(s.keyboard.pressed("left")) {
-            s.mode = 'left'
+            //s.mode = 'left';
+            s.callbackController('left');
         }
         if(s.keyboard.pressed("right")) {
-            s.mode = 'right';
+            //s.mode = 'right';
+            s.callbackController('right');
         }
         if(s.keyboard.pressed("up")) {
-            s.mode = 'up';
+            //s.mode = 'up';
+            s.callbackController('up');
         }
         if(s.keyboard.pressed("down")) {
-            s.mode = 'down';
-
+            //s.mode = 'down';
+            s.callbackController('down');
+        }
+        if(s.keyboard.pressed("space")) {
+            s.mode = null;
+            s.callbackController(s.mode);
         }
         // on fait tourner le cube sur ses axes x et y
         if(groupeShere && sphere){

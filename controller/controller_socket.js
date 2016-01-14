@@ -7,8 +7,8 @@ var socketMVC = require('socket.mvc');
 
 /*Login logic*/
 controller_socket.emit = function(event){
-    console.log('Socket Emit ' + event);
-    socketMVC.everyone('socket_event',event);
+    console.log('Event from the server to the client: ' + event);
+    socketMVC.everyone('server_event',event);
 } ;
 
 module.exports = controller_socket;

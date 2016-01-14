@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 //var controller_sphero = require('./controller/controller_sphero');
-//var controller_myo = require('./controller/controller_myo');
+var controller_myo = require('./controller/controller_myo');
 
 
 var app = express();

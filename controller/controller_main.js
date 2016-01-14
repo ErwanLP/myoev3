@@ -3,50 +3,57 @@
  */
 
 var controller_socket = require('./controller_socket');
-//var controller_sphero = require('./controller_sphero');
 var controller_main = {};
+var sphero = false;
+if(sphero){
+    var controller_sphero = require('./controller_sphero');
+}
 
 
 controller_main.treatment = function(event){
-    controller_socket.emit(event);
     switch(event) {
         case "fingers_spread":
-            console.log('fingers_spread');
+            controller_socket.emit(null);
+            if(sphero)
 			controller_sphero.stop();
             break;
         case "fingers_spread_off":
-            console.log('fingers_spread_off');
             break;
+        case "left":
         case "wave_in":
-            console.log('wave_in');
+            controller_socket.emit('left');
+            if(sphero)
             controller_sphero.left();
             break;
         case "wave_in_off":
-            console.log('wave_in_off');
             break;
+        case 'right':
         case "wave_out":
-            console.log('wave-out');
+            controller_socket.emit('right');
+            if(sphero)
 			controller_sphero.right();
             break;
         case "wave_out_off":
-            console.log('wave_out_off');
             break;
+        case 'up' :
         case "fist":
-            console.log('fist');
+            controller_socket.emit('up');
+            if(sphero)
 			controller_sphero.up();
             break;
         case "fist_off":
-            console.log('fist_off');
             break;
+        case 'down' :
         case "double_tap":
-            console.log('double_tap');
-			controller_sphero.down();
+            controller_socket.emit('down');
+            if(sphero)
+            controller_sphero.down();
             break;
         case "double_tap_off":
-            console.log('double_tap_off');
+            //console.log('double_tap_off');
             break;
         default :
-            console.log('default : ' + event);
+            controller_socket.emit(null);
     }
 };
 module.exports = controller_main;
