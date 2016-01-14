@@ -98,6 +98,7 @@ myoApp.factory('displayService', ['$http', function ($http) {
         }
         if(s.keyboard.pressed("down")) {
             s.mode = 'down';
+
         }
         // on fait tourner le cube sur ses axes x et y
         if(groupeShere && sphere){
