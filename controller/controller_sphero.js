@@ -3,13 +3,11 @@
  */
 var controller_sphero = {};
 
-// require("controller-myo.js");
+// require("./controller-myo.js");
 /* eslint no-use-before-define: 0 */
 /* eslint no-process-exit: 0 */
-var Myo = require('myo');
+// var Myo = require('myo');
 var sphero = require("sphero");
-
-// make sure you install this first - `npm install keypress`
 var keypress = require("keypress");
 
 var orb = sphero("COM3");

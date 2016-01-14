@@ -51,4 +51,3 @@ Myo.on('fist_off', function(){
 Myo.on('double_tap_off', function(){
     controller_main.treatment("double_tap_off");
 });
-

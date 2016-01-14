@@ -3,7 +3,7 @@
  */
 
 var controller_socket = require('./controller_socket');
-//var controller_sphero = require('./controller_sphero');
+var controller_sphero = require('./controller_sphero');
 var controller_main = {};
 
 
