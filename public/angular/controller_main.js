@@ -12,9 +12,19 @@ myoApp.controller('MainController', ['$scope', 'displayService', function($scope
 		socket.emit('client_event', event);
 		console.log('emit : '+ event);
 	}	
-	socket.on('send_picture', function (event){	
-		$scope.event = event;
-		console.log('reception : '+event);
+	socket.on('client_event', function(){
+		var delivery = new Delivery(socket);
+
+		delivery.on('receive.start',function(fileUID){
+		  console.log('receiving a file!');
+		});
+
+		delivery.on('receive.success',function(file){
+		  // var params = file.params;
+		  if (file.isImage()) {
+			$('img').attr('src', file.dataURL());
+		  };
+		});
 	});
 }]);
 
