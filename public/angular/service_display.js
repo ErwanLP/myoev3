@@ -39,15 +39,12 @@ myoApp.factory('displayService', ['$http', function ($http) {
         var sphere = new THREE.Mesh( geometry, material );
         scene.add( sphere );
 
-        // Add OrbitControls so that we can pan around with the mouse.
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
     }
 
 // Renders the scene and updates the render as needed.
     function animate() {
         requestAnimationFrame( animate );
         renderer.render( scene, camera );
-        controls.update();
     }
 
 
