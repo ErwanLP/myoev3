@@ -5,44 +5,115 @@ myoApp.factory('displayService', ['$http', function ($http) {
 
     var s = {  };
     console.log('service display init');
-    var scene, camera, renderer;
 
-    init();
+    var renderer, scene, camera, mesh, width, height;
+
+    var sphere;
+
+    s.mode = null;
+
+    width = 500;
+    height = 500;
+
+
+    init(width, height);
     animate();
 
-// Sets up the scene.
-    function init() {
-        // Create the scene and set the scene size.
+    function init(){
         scene = new THREE.Scene();
-        var WIDTH = 400,
-            HEIGHT = 300;
-
-        // Create a renderer and add it to the DOM.
-        renderer = new THREE.WebGLRenderer({antialias:true});
-        renderer.setSize(WIDTH, HEIGHT);
-        document.body.appendChild(renderer.domElement);
-        renderer.domElement.id = "context";
-
-        // Create a camera, zoom it out from the model a bit, and add it to the scene.
-        camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 20000);
-        camera.position.set(100,100,100);
+        camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000 );
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+        renderer.setClearColor( 0xffffff, 0);
+        document.getElementById('context').appendChild(renderer.domElement);
+        camera.position.set(30, 30, 0);
+        camera.lookAt(new THREE.Vector3(0,0,0));
         scene.add(camera);
 
-        // Create a light, set its position, and add it to the scene.
-        var light = new THREE.AmbientLight( 0x404040 ); // soft white light
-        scene.add( light );
+        // create a camera contol
+        //cameraControls	= new THREEx.DragPanControls(camera)
+        s.keyboard = new THREEx.KeyboardState();
 
-        // Add a white PointLight to the scene.
-        var geometry = new THREE.SphereGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-        var sphere = new THREE.Mesh( geometry, material );
-        scene.add( sphere );
+        //add ground
+        var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg');
+        grassTex.wrapS = THREE.RepeatWrapping;
+        grassTex.wrapT = THREE.RepeatWrapping;
+        grassTex.repeat.x = 256;
+        grassTex.repeat.y = 256;
+        var groundMat = new THREE.MeshBasicMaterial({map:grassTex});
+        var groundGeo = new THREE.PlaneGeometry(400,400);
+        var ground = new THREE.Mesh(groundGeo,groundMat);
+        ground.position.y = -1.9; //lower it
+        ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis
+        //IMPORTANT, draw on both sides
+        ground.doubleSided = true;
+        scene.add(ground);
 
+        //add sphere
+        var geometry = new THREE.SphereGeometry(3, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+        var loader = new THREE.TextureLoader();
+        loader.load(
+            // resource URL
+            'images/plutomap1K.jpg',
+            // Function when resource is loaded
+            function ( texture ) {
+                // do something with the texture
+                var material = new THREE.MeshBasicMaterial( {
+                    map: texture
+                } );
+                sphere = new THREE.Mesh(geometry, material);
+                scene.add(sphere);
+            },
+            // Function called when download progresses
+            function ( xhr ) {
+                //console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+            },
+            // Function called when download errors
+            function ( xhr ) {
+                console.log( 'An error happened' );
+            }
+        );
     }
 
-// Renders the scene and updates the render as needed.
-    function animate() {
+    function animate(){
+        // on appel la fonction animate() récursivement à chaque frame
         requestAnimationFrame( animate );
+        // update camera controls
+        //cameraControls.update();
+        s.mode = null;
+        if(s.keyboard.pressed("left")) {
+            s.mode = 'left'
+        }
+        if(s.keyboard.pressed("right")) {
+            s.mode = 'right';
+        }
+        if(s.keyboard.pressed("up")) {
+            s.mode = 'up';
+        }
+        if(s.keyboard.pressed("down")) {
+            s.mode = 'down';
+        }
+        // on fait tourner le cube sur ses axes x et y
+        if(sphere){
+            switch(s.mode) {
+                case 'up':
+                    sphere.translateX(-0.05);
+                    break;
+                case 'down':
+                    sphere.translateX(0.05);
+                    break;
+                case 'left':
+                    sphere.translateZ(0.05);
+                    break;
+                case 'right':
+                    sphere.translateZ(-0.05);
+                    break;
+                default:
+                //console.error('s.mode = ' + s.mode + 'not define');
+            }
+        }
+
+        // on effectue le rendu de la scène
         renderer.render( scene, camera );
     }
 
