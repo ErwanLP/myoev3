@@ -1,7 +1,6 @@
 /**
  * Created by Erwan on 14/01/2016.
  */
- 
 var socket = io.connect('http://localhost:3000');
 var myoApp = angular.module('myoApp',[]);
 
