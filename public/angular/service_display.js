@@ -8,7 +8,11 @@ myoApp.factory('displayService', ['$http', function ($http) {
 
     var renderer, scene, camera, mesh, width, height;
 
-    var sphere;
+    var sphere, groupeShere;
+
+    var vitesseTranslation = 0.1;
+
+    var vitesseRotation = vitesseTranslation / 1.5;
 
     s.mode = null;
 
@@ -26,7 +30,7 @@ myoApp.factory('displayService', ['$http', function ($http) {
         renderer.setSize(width, height);
         renderer.setClearColor( 0xffffff, 0);
         document.getElementById('context').appendChild(renderer.domElement);
-        camera.position.set(30, 30, 0);
+        camera.position.set(20, 20, 0);
         camera.lookAt(new THREE.Vector3(0,0,0));
         scene.add(camera);
 
@@ -50,6 +54,7 @@ myoApp.factory('displayService', ['$http', function ($http) {
         scene.add(ground);
 
         //add sphere
+        groupeShere = new THREE.Object3D();//create an empty container
         var geometry = new THREE.SphereGeometry(3, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
         var loader = new THREE.TextureLoader();
         loader.load(
@@ -62,7 +67,8 @@ myoApp.factory('displayService', ['$http', function ($http) {
                     map: texture
                 } );
                 sphere = new THREE.Mesh(geometry, material);
-                scene.add(sphere);
+                groupeShere.add( sphere );//add a mesh with geometry to it
+                scene.add( groupeShere );//when done, add the group to the scene
             },
             // Function called when download progresses
             function ( xhr ) {
@@ -94,19 +100,25 @@ myoApp.factory('displayService', ['$http', function ($http) {
             s.mode = 'down';
         }
         // on fait tourner le cube sur ses axes x et y
-        if(sphere){
+        if(groupeShere && sphere){
             switch(s.mode) {
                 case 'up':
-                    sphere.translateX(-0.05);
+                    groupeShere.translateX(-vitesseTranslation);
+                    sphere.rotation.z -= vitesseRotation;
                     break;
                 case 'down':
-                    sphere.translateX(0.05);
+                    groupeShere.translateX(vitesseTranslation);
+                    sphere.rotation.z += vitesseRotation;
+
                     break;
                 case 'left':
-                    sphere.translateZ(0.05);
+                    groupeShere.translateZ(vitesseTranslation);
+                    sphere.rotation.x += vitesseRotation;
                     break;
                 case 'right':
-                    sphere.translateZ(-0.05);
+                    groupeShere.translateZ(-vitesseTranslation);
+                    sphere.rotation.x -= vitesseRotation;
+
                     break;
                 default:
                 //console.error('s.mode = ' + s.mode + 'not define');
