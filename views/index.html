@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myoApp">
 <head>
     <meta charset="utf-8" />
-    <title>Socket.io</title>
+    <title>MYO</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script src="angular/controller_main.js"></script>
+
+
 </head>
 
-<body>
+<body ng-controller="MainController as MainCtrl">
 <h1>Communication avec socket.io !</h1>
 
 <p><input type="button" value="wave in" id="poke" /></p>
+{{greeting}}
 
 
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
