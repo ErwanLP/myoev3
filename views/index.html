@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css" media="all"/>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script src="/js/delivery.js"></script>
     <script src="vendor/bootstrap/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
@@ -19,7 +18,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
     <script src="angular/controller_main.js"></script>
     <script src="angular/service_display.js"></script>
-
+	
   </head>
   <body style="overflow:hidden; margin:0" ng-controller="MainController as MainCtrl">
       
@@ -37,7 +36,7 @@
                 <div id="carousel" style="height:178px;" class="carousel slide">
                   
                   <div class="carousel-inner text-center h-full">                  
-                    <div class="item active h-full"><img alt="Bootstrap Image Preview" ng-src = "img/myo_event/{{MainCrtl.event}}.jpg" style="height:100%;margin:0 auto;">
+                    <div class="item active h-full"><img alt="Bootstrap Image Preview" src = "{{snapshot}}" style="height:100%;margin:0 auto;">
                       
                     </div>
                     

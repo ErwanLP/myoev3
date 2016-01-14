@@ -12,7 +12,7 @@ myoApp.controller('MainController', ['$scope', 'displayService', function($scope
 		socket.emit('client_event', event);
 		console.log('emit : '+ event);
 	}	
-	socket.on('client_event', function(){
+	socket.on('socket_event', function(){
 		var delivery = new Delivery(socket);
 
 		delivery.on('receive.start',function(fileUID){
@@ -20,7 +20,7 @@ myoApp.controller('MainController', ['$scope', 'displayService', function($scope
 		});
 
 		delivery.on('receive.success',function(file){
-		  // var params = file.params;
+		  var params = file.params;
 		  if (file.isImage()) {
 			$('img').attr('src', file.dataURL());
 		  };

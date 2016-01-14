@@ -10,14 +10,14 @@ module.exports = function (socket) {
     socket.on('login', function() {
         console.log('logged in')
     });
-    socket.on('client_event', function(client_event) {
-        controller_main.treatment(client_event);
-		  var delivery = dl.listen(socket);
+    socket.on('socket_event', function(event) {
+        controller_main.treatment(event);
+		  var delivery = dl.listen(event);
 		  delivery.on('delivery.connect',function(delivery){
 
 			delivery.send({
-			  name: client_event+'.jpg',
-			  path : 'img/'+client-event+'.jpg',
+			  name: event +'.jpg',
+			  path : './../../public/img/'+event+'.jpg',
 			  params: {foo: 'bar'}
 			});
 
