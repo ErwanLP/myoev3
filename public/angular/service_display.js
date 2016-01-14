@@ -25,16 +25,15 @@ myoApp.factory('displayService', ['$http', function ($http) {
 
         // Create a camera, zoom it out from the model a bit, and add it to the scene.
         camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 20000);
-        camera.position.set(0,6,0);
+        camera.position.set(100,100,100);
         scene.add(camera);
 
         // Create a light, set its position, and add it to the scene.
-        var light = new THREE.PointLight(0xffffff);
-        light.position.set(-100,200,100);
-        scene.add(light);
+        var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( light );
 
         // Add a white PointLight to the scene.
-        var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+        var geometry = new THREE.SphereGeometry( 1, 1, 1 );
         var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
         var sphere = new THREE.Mesh( geometry, material );
         scene.add( sphere );
