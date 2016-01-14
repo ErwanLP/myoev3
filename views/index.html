@@ -17,9 +17,10 @@
     <script src="angular/service_display.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
     <script src="angular/controller_main.js"></script>
+    <script src="angular/delivery.js"></script>
     <script src="angular/service_display.js"></script>
-	
-  </head>
+    <script src="javascripts/threex.keyboardstate.js"></script>
+</head>
   <body style="overflow:hidden; margin:0" ng-controller="MainController as MainCtrl">
       
         <div class="hbox hbox-auto-xs">
@@ -36,7 +37,7 @@
                 <div id="carousel" style="height:178px;" class="carousel slide">
                   
                   <div class="carousel-inner text-center h-full">                  
-                    <div class="item active h-full"><img alt="Bootstrap Image Preview" src = "{{snapshot}}" style="height:100%;margin:0 auto;">
+                    <div class="item active h-full"><img alt="Bootstrap Image Preview" src = "" style="height:100%;margin:0 auto;">
                       
                     </div>
                     
@@ -57,7 +58,7 @@
               <div class="panel b-a">
                 <div class="panel-heading bg-info" style="text-align:center;">MYO MODEL</div>
                 <div style="height:605px;" class="panel-body">
-                    <div class="img-responsive" id="context"></div>
+                    <div style="/* width: 500px; *//* height: 500px; *//* display: table; *//* margin: 0 auto; */position: absolute;    left: 50%;    margin-left: -100px;margin-top: 102px;" id="context"></div>
                 </div>
               </div>
             </div>
