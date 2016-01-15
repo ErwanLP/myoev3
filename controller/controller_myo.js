@@ -14,9 +14,21 @@ Myo.connect('com.stolksdorf.myAwesomeApp');
 
 Myo.on('connected', function(){
     console.log('connected with myo');
+    this.requestBatteryLevel();
+    this.requestBluetoothStrength();
+
+});
+
+Myo.on('battery_level', function(val){
+    console.log('battery_level = ' + val);
+    controller_main.myoInfo({battery_level : val});
 });
 
 
+Myo.on('bluetooth_strength', function(val){
+    console.log('bluetooth_strength = ' + val);
+    controller_main.myoInfo({bluetooth_strength : val});
+});
 
 /** Pose */
 Myo.on('fingers_spread', function(){

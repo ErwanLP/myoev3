@@ -5,9 +5,20 @@
 var controller_socket = require('./controller_socket');
 var controller_main = {};
 var sphero = false;
+controller_main.myoData = {};
 if(sphero){
     var controller_sphero = require('./controller_sphero');
 }
+
+controller_main.myoInfo = function(info){
+    if(info.battery_level){
+        controller_main.myoData.battery_level = info.battery_level
+    } else if(info.bluetooth_strength){
+        controller_main.myoData.bluetooth_strength = info.bluetooth_strength
+    } else {
+        console.error('Info Myo Error' + info);
+    }
+};
 
 
 controller_main.treatment = function(event){

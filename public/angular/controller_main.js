@@ -4,12 +4,15 @@
 //var socket = io.connect('http://localhost:3000');
 var myoApp = angular.module('myoApp',[]);
 
-myoApp.controller('MainController', ['$scope', 'displayService', function($scope, displayService) {
+myoApp.controller('MainController', ['$scope', 'displayService', 'myoInfo', function($scope, displayService, myoInfo) {
 	$scope.event = 'up';
 	$scope.displayService = displayService;
     console.log('Main controller init');
 
-	console.log(displayService);
+	myoInfo.getMyoInfo(function(data){
+		var text = 'Battery = '+data.battery_level + '\n\b Bluetooth = ' + data.bluetooth_strength;
+		document.getElementById('myoInfo').innerHTML += text;
+	});
 	displayService.callbackController = function (current_event) {
 		console.log('event from the client to the server : '+ current_event);
 		socket.emit('client_event', current_event);
