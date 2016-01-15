@@ -25,7 +25,10 @@ myoApp.controller('MainController', ['$scope', 'displayService', 'myoInfo', func
 	});
 
 	var change_event = function(current_event){
-		$scope.event = current_event;
+		if(!current_event){
+			current_event = 'stop';
+		}
+		document.getElementById("imageEvent").src="images/events/"+current_event+".png";
 	}
 
 }]);
