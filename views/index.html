@@ -21,6 +21,7 @@
     <script src="angular/service_display.js"></script>
     <script src="angular/myoInfo.js"></script>
     <script src="javascripts/threex.keyboardstate.js"></script>
+
 </head>
   <body style="overflow:hidden; margin:0" ng-controller="MainController as MainCtrl">
       
@@ -50,8 +51,12 @@
               <div class="panel b-a" style="height:309px;">
                 <div class="panel-heading bg-info" style="text-align:center;">MYO INFORMATION</div>
                 <div class="panel-body text-center">
-                  <h4 class="text-dark" id="myoInfo"></h4>
-              </div>
+                    <h4 class="text-dark" id="myoInfo_battery"></h4>
+                    <progress id="myoInfo_battery_progressBar" value="100" max="100"></progress>
+                    <h4 class="text-dark" id="myoInfo_BT"></h4>
+                    <progress id="myoInfo_BT_progressBar" value="100" max="100"></progress>
+
+                </div>
               </div>
             </div>
           </div>
